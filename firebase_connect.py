@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 import firebase_admin
 from firebase_admin import credentials,firestore
 import json
@@ -13,16 +7,12 @@ firebase_admin.initialize_app(cred)
 datab= firestore.client()
 vtitle=[]
 ititle=[]
-usersref = datab.collection(u'users')
 iewref = datab.collection(u'iew')
 internref=datab.collection(u'internship')
 
 
-# In[ ]:
-
-
-#Function for removing special characters from the string
 def splremover(x):
+    print(x)
     bad_chars = [';', ':', '!', "*",'(',')','"']
     temp = ''
     str1=""
@@ -34,18 +24,9 @@ def splremover(x):
         user=list(res.split(','))
     return user
 
-
-# In[ ]:
-
-
-def videoreturn(uid):
-#Fetching from user collection
-    docs = usersref.stream()
-    for doc in docs:
-        data=doc.to_dict()
-        if(uid==doc.get("uid")):
-            x1=json.dumps(data.get("area of interest"))
-    user=splremover(x1) 
+def videoreturn(aoi):
+#Cleaning the incoming area of interest
+    user = [''.join(e for e in string if e.isalnum()) for string in aoi]
     
 #Fetching from iew
     docs = iewref.stream()
@@ -87,10 +68,3 @@ def videoreturn(uid):
     iewtags=yesvideotags+novideotags
     interntags=yesinterntags+nointerntags
     return(iewtags,interntags)
-
-
-# In[ ]:
-
-
-x=videoreturn(uid)
-
