@@ -26,8 +26,8 @@ def splremover(x):
 
 def videoreturn(aoi):
 #Cleaning the incoming area of interest
-    user = [''.join(e for e in string if e.isalnum()) for string in aoi]
-    
+    xx=re.sub(r"[\(\)]",'',aoi)
+    user=list(xx.split(","))
 #Fetching from iew
     docs = iewref.stream()
     for moc in docs:
@@ -67,4 +67,6 @@ def videoreturn(aoi):
 #Combining the 2 arrays
     iewtags=yesvideotags+novideotags
     interntags=yesinterntags+nointerntags
+    iewtags = [a for a in iewtags if a.strip()]
+    interntags = [ b for b in interntags if b.strip()]
     return(iewtags,interntags)
