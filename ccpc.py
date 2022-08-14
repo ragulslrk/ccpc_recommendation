@@ -5,19 +5,15 @@
 
 
 import firebase_admin
-<<<<<<< HEAD:ccpc.py
-from firebase_admin import credentials``
-
-credi = credentials.Certificate("./credentials/private_key.json")
-firebase_admin.initialize_app(credi)
-def prints():
-    a='hi'
-    return a
-=======
 from firebase_admin import credentials,firestore
 import json
 import re
-cred = credentials.Certificate("./private_key.json")
+
+cred = credentials.Certificate("./credentials/private_key.json")
+
+
+
+
 firebase_admin.initialize_app(cred)
 datab= firestore.client()
 vtitle=[]
@@ -103,4 +99,3 @@ def videoreturn(uid):
 
 x=videoreturn(uid)
 
->>>>>>> 52533d6e17c664812c102ff263e9f7c3c1e03686:firebase_connect.py
